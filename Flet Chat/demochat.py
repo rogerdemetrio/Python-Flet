@@ -4,9 +4,9 @@ def main(pagina):
     # Atributos da pagina
     pagina.title = "ChatChatChatLine"
     pagina.bgcolor = ft.colors.GREY_700
-    pagina.padding = 0
+    pagina.padding = 25
     pagina.spacing = 0
-    pagina.horizontal_alignment = "stretch"
+    #pagina.horizontal_alignment = "center"
 
     # Variaveis globais
     texto = ft.Text("ChatChatChatLine")
@@ -43,16 +43,15 @@ def main(pagina):
     def entrar_popup(evento):
         if nome_usuario.value != "":
             pagina.pubsub.send_all({"usuario": nome_usuario.value, "tipo": "entrada"})
-            # adicionar o chat
-            # pagina.add(ft.Container(chat, padding=5, expand=True,bgcolor=ft.colors.GREY_500))
             # fechar o popup
             popup.open = False
             # remover o botao iniciar chat e texto enviado
             pagina.remove(botao_iniciar)
             pagina.remove(texto)
-            # criar o campo de mensagem do usuario e o botao de enviar mensagem do usuario
-            pagina.add(ft.Container(chat, padding=25, expand=True),
-                       ft.Row([ft.Container(ft.Row([campo_mensagem, botao_enviar_mensagem]), padding=25, expand=True)]))
+            # adicionar o chat
+            # e criar o campo de mensagem do usuario e o botao de enviar mensagem do usuario
+            pagina.add(ft.Container(chat, expand=True),
+                       ft.Row([ft.Container(ft.Row([campo_mensagem, botao_enviar_mensagem]), expand=True)]))
         
         pagina.update()
 
