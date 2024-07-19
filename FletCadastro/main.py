@@ -1,19 +1,22 @@
 import flet as ft 
+#TODO: Remover os modulos do arquivo principal
+#from modulos import *
 
 titulo = ft.Text("Central de cadastros",size=24)
-#TODO: Remover os modulos do arquivo principal
 #TODO: Criar classe de modulos de cadastro
 def main(page: ft.Page):
-    page.Title = titulo
+    page.Title = "Central de cadastros"
 
-
+#DONE: Tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
     def pag_index(e):
         if e == 0:
+            page.controls.clear()
             cadastroProduto()
         if e == 1:
+            page.controls.clear()
             cadastroPessoa()
-
         if e == 2:
+            page.controls.clear()
             cadastroPesquisa()
 
     page.navigation_bar = ft.CupertinoNavigationBar(
@@ -30,34 +33,43 @@ def main(page: ft.Page):
         )
     
     def cadastroProduto():
-        page.controls.clear()
         titulo = ft.Container(ft.Text("Cadastro de produtos",size=24))
-        lab_pro = ft.Container(ft.Text("Nome do produto:",size=12))
-        corpo = ft.Column([titulo,lab_pro])
+        label1 = ft.Container(ft.Text("Nome do produto:",size=12))
+        input1 = ft.TextField(label="Digite o nome do produto")
+        label2 = ft.Container(ft.Text("Valor do produto:",size=12))
+        input2 = ft.TextField(label="Digite o valor do produto")
+        label3 = ft.Container(ft.Text("Valor do produto:",size=12))
+        input3 = ft.TextField(label="Digite o valor do produto")
+        label4 = ft.Container(ft.Text("Valor do produto:",size=12))
+        input4 = ft.TextField(label="Digite o valor do produto")
+        btn = ft.FloatingActionButton(icon=ft.icons.ADD, bgcolor=ft.colors.LIGHT_GREEN_900)
+        corpo = ft.Column(controls=[
+                            titulo,
+                            ft.ResponsiveRow([ft.Column(col={"sm": 6}, controls=[label1,input1]),ft.Column(col={"sm": 6}, controls=[label2,input2])]),
+                            ft.ResponsiveRow([ft.Column(col={"sm": 6}, controls=[label3,input3]),ft.Column(col={"sm": 6}, controls=[label4,input4])]),
+                            ft.Column(controls=[btn],alignment=ft.CrossAxisAlignment.END,expand=1),
+                            ])
         page.add(corpo)
 
-    def cadastroPessoa():
-        page.controls.clear()           
+    def cadastroPessoa():        
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=24))
-        lab_pro = ft.Container(ft.Text("Nome da pessoa:",size=12))
-        corpo = ft.Column([titulo,lab_pro])
+        label1 = ft.Container(ft.Text("Nome da pessoa:",size=12))
+        input1 = ft.TextField(label="Digite o nome da pessoa")
+        #btn_send = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=fab_pressed, bgcolor=ft.colors.LIME_300)
+        corpo = ft.Column([titulo,label1,ft.Row([input1])])
         page.add(corpo)
 
     def cadastroPesquisa():
-        page.controls.clear()           
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=24))
-        lab_pro = ft.Container(ft.Text("Nome do produto:",size=12))
-        corpo = ft.Column([titulo,lab_pro])
+        label1 = ft.Container(ft.Text("Nome do produto:",size=12))
+        input1 = ft.TextField(label="Digite o nome do produto")
+        #btn_send = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=fab_pressed, bgcolor=ft.colors.LIME_300)
+        corpo = ft.Column([titulo,label1,ft.Row([input1])])
         page.add(corpo)
-            
+        
     cadastroProduto()
 
     page.update()
 ft.app(target=main)
 
-#DONE: Criar uma tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
 
-#TODO: Conectar todos os modulos ao main:
-    # Modulo de produto
-    # Modulo de pessoa
-    # Modulo de pesquisa de mercado
