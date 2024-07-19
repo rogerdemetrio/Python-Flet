@@ -1,17 +1,22 @@
 import flet as ft 
-import modulos
 
 titulo = ft.Text("Central de cadastros",size=24)
+#TODO: Remover os modulos do arquivo principal
+#TODO: Criar classe de modulos de cadastro
+def main(page: ft.Page):
+    page.Title = titulo
 
-#TODO: Criar modulos de cadastro:
 
-produto_tab = True
-pessoa_tab = True
-pesquisa_tab = True
-def main(p: ft.Page):
-    p.Title = titulo
+    def pag_index(e):
+        if e == 0:
+            cadastroProduto()
+        if e == 1:
+            cadastroPessoa()
 
-    p.navigation_bar = ft.CupertinoNavigationBar(
+        if e == 2:
+            cadastroPesquisa()
+
+    page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
             active_color=ft.colors.YELLOW_400,
@@ -22,23 +27,35 @@ def main(p: ft.Page):
                 ft.NavigationBarDestination(icon=ft.icons.PEOPLE_OUTLINED,selected_icon=ft.icons.PEOPLE, label="Pessoas"),
                 ft.NavigationBarDestination(icon=ft.icons.BOOK_OUTLINED,selected_icon=ft.icons.BOOK, label="Pesquisa"),
             ],
-            
         )
-    def pag_index(n):
-        print(n)
-        if n == 0:
-            modulos.cadastroProduto()
-        if n == 1:
-            modulos.cadastroPessoa()
-        if n == 2:
-            modulos.cadastroPesquisa()
-        else:
-            modulos.cadastroProduto()
-        
-    p.update()
+    
+    def cadastroProduto():
+        page.controls.clear()
+        titulo = ft.Container(ft.Text("Cadastro de produtos",size=24))
+        lab_pro = ft.Container(ft.Text("Nome do produto:",size=12))
+        corpo = ft.Column([titulo,lab_pro])
+        page.add(corpo)
+
+    def cadastroPessoa():
+        page.controls.clear()           
+        titulo = ft.Container(ft.Text("Cadastro de pessoa",size=24))
+        lab_pro = ft.Container(ft.Text("Nome da pessoa:",size=12))
+        corpo = ft.Column([titulo,lab_pro])
+        page.add(corpo)
+
+    def cadastroPesquisa():
+        page.controls.clear()           
+        titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=24))
+        lab_pro = ft.Container(ft.Text("Nome do produto:",size=12))
+        corpo = ft.Column([titulo,lab_pro])
+        page.add(corpo)
+            
+    cadastroProduto()
+
+    page.update()
 ft.app(target=main)
 
-#TODO: Criar uma tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
+#DONE: Criar uma tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
 
 #TODO: Conectar todos os modulos ao main:
     # Modulo de produto
