@@ -1,8 +1,5 @@
 import flet as ft 
-#TODO: Remover os modulos do arquivo principal
-#from modulos import *
 
-titulo = ft.Text("Central de cadastros",size=24)
 #TODO: Criar classe de modulos de cadastro
 def main(page: ft.Page):
     page.Title = "Central de cadastros"
@@ -45,9 +42,9 @@ def main(page: ft.Page):
         btn = ft.FloatingActionButton(icon=ft.icons.ADD, bgcolor=ft.colors.LIGHT_GREEN_900)
         corpo = ft.Column(controls=[
                             titulo,
-                            ft.ResponsiveRow([ft.Column(col={"sm": 6}, controls=[label1,input1]),ft.Column(col={"sm": 6}, controls=[label2,input2])]),
-                            ft.ResponsiveRow([ft.Column(col={"sm": 6}, controls=[label3,input3]),ft.Column(col={"sm": 6}, controls=[label4,input4])]),
-                            ft.Column(controls=[btn],alignment=ft.CrossAxisAlignment.END,expand=1),
+                            ft.ResponsiveRow([ft.Column(col={"md": 6}, controls=[label1,input1]),ft.Column(col={"md": 6}, controls=[label2,input2])]),
+                            ft.ResponsiveRow([ft.Column(col={"md": 6}, controls=[label3,input3]),ft.Column(col={"md": 6}, controls=[label4,input4])]),
+                            ft.Column(controls=[btn],alignment=ft.CrossAxisAlignment.END),
                             ])
         page.add(corpo)
 
