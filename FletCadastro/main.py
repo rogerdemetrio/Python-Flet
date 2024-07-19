@@ -4,7 +4,7 @@ import flet as ft
 def main(page: ft.Page):
     page.Title = "Central de cadastros"
 
-#DONE: Tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
+#TODO: Tela principal que consiga encaixar outros modulos de cadastro e visualização de dados
     def pag_index(e):
         if e == 0:
             page.controls.clear()
