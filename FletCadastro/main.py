@@ -46,7 +46,7 @@ def main(page: ft.Page):
                             ft.ResponsiveRow([ft.Column(col={"md": 6}, controls=[label3,input3]),ft.Column(col={"md": 6}, controls=[label4,input4])]),
                             ft.Column(controls=[btn],alignment=ft.CrossAxisAlignment.END),
                             ])
-        page.add(corpo)
+        page.add(corpo) 
 
     def cadastroPessoa():        
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=24))
