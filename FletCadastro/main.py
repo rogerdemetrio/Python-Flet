@@ -26,7 +26,7 @@ def main(page: ft.Page):
     listapesquisas={}  
 # Main
     
-    def pag_index(e):
+    def pag_index(e): 
         if e == 0:
             page.controls.clear()
             cadastroProduto()
