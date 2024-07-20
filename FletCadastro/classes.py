@@ -1,5 +1,6 @@
 import flet as ft 
 
+
 class InputField(ft.TextField):
     def __init__(self,label,multiline=False,min_lines=1,max_lines=1):
         super().__init__()
@@ -18,3 +19,4 @@ class CorpoContainer(ft.Container):
         self.padding=5
         self.margin=5
         self.expand=2
+
