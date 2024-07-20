@@ -3,6 +3,8 @@
 - [x] Chat criado com FLET e tunelado possibilitando a conversa de 2 ou mais pessoas
 >- [x] Chat interno
 >- [ ] Chat Externo
-- [ ] Cadastro de produtos, pessoas etc
->- [ ] Cadastro de produtos
->- [ ] Cadastro de pessoas
+- [ ] Central de cadastros
+>- [x] Cadastro de produtos
+>- [x] Cadastro de pessoas
+>- [x] Cadastro de pesquisa
+>- [ ] Gravar informações em banco de dados
