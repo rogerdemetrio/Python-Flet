@@ -19,3 +19,4 @@ class CorpoContainer(ft.Container):
         self.padding = 5
         self.margin = 5
         self.expand = 2
+
