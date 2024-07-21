@@ -13,10 +13,9 @@ class InputField(ft.TextField):
         self.max_lines = max_lines
 
 class CorpoContainer(ft.Container):
-    def __init__(self,content):
+    def __init__(self,content=[]):
         super().__init__()
-        self.content=content
-        self.padding=5
-        self.margin=5
-        self.expand=2
-
+        self.content = content
+        self.padding = 5
+        self.margin = 5
+        self.expand = 2

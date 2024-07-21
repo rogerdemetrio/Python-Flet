@@ -4,10 +4,12 @@ import listas as l
 
 #TODO: Criar classe de modulos de cadastro
 def main(page: ft.Page):
+# Main
+    header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=36),alignment=ft.alignment.center), ft.Divider()])
+    
+
     page.Title = "Central de cadastros"
 
-# Main
-    
     def pag_index(e): 
         if e == 0:
             page.controls.clear()
@@ -19,9 +21,17 @@ def main(page: ft.Page):
             page.controls.clear()
             cadastroPesquisa()
 
-    header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=36),alignment=ft.alignment.center), ft.Divider()])
-    footer = ft.Column([ft.Divider(),ft.Text("Footer")])
+    def btn_add(e):
+        if pagina == 0:
+            page.add(ft.Column(controls=[ft.Text(f"Pagina: {pagina}")]))
+            print(j)
+        if pagina == 1:
+            page.add(ft.Column(controls=[ft.Text(f"Pagina: {pagina}")]))
+        if pagina == 2:
+            page.add(ft.Column(controls=[ft.Text(f"Pagina: {pagina}")]))
 
+    footer = ft.Divider()
+    
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
@@ -35,52 +45,40 @@ def main(page: ft.Page):
             ],
         )
     
-    def btn_add(e):
-        print("Clicou")
-        #page.add()
+    btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
 
     def cadastroProduto():
-        i = 4
+        global pagina,j
+        pagina = 0
+        j = 4
         titulo = ft.Text("Cadastro de produtos",size=24)
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.pro(0)),
-                        ft.Column(col={"md": 6}, controls = l.pro(1)),
-                        ft.Column(col={"md": 6}, controls = l.pro(2)),
-                        ft.Column(col={"md": 6}, controls = l.pro(3)),
-                    ])
-            
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
+        for i in range(0,j):
+            mid_sec = l.pro(i)
+            page.add(mid_sec)
+        page.add(ft.Column(controls=[ft.Column(controls=[btn]),ft.Column(controls=[footer])] ))
 
     def cadastroPessoa():
-        i = 2
+        global pagina,j
+        pagina = 1
+        j = 2
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=24))
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.pes(0)),
-                        ft.Column(col={"md": 6}, controls = l.pes(1)),
-                    ])
-            
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
+        for i in range(0,j):
+            mid_sec = l.pes(i)
+            page.add(mid_sec)
+        page.add(ft.Column(controls=[ft.Column(controls=[btn]),ft.Column(controls=[footer])] ))
 
     def cadastroPesquisa():
-        i = 5
+        global pagina,j
+        pagina = 2
+        j = 5
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=24))
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.peq(0)),
-                        ft.Column(col={"md": 6}, controls = l.peq(1)),
-                        ft.Column(col={"md": 6}, controls = l.peq(2)),
-                        ft.Column(col={"md": 6}, controls = l.peq(3)),
-                        ft.Column(col={"md": 12}, controls = l.peq(4)),
-                    ])
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
+        for i in range(0,j):
+            mid_sec = l.peq(i)
+            page.add(mid_sec)
+        page.add(ft.Column(controls=[ft.Column(controls=[btn]),ft.Column(controls=[footer])] ))
         
 
     cadastroProduto()
