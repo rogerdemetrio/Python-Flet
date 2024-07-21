@@ -4,7 +4,7 @@ import listas as l
 
 def main(page: ft.Page):
 # Main
-    page.window.center()
+    #page.window.center()
     header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
     page.bgcolor = ft.colors.GREY_900
     page.padding = 20
@@ -13,9 +13,10 @@ def main(page: ft.Page):
     page.window.maximizable = False
     page.window.resizable = False
     page.window.shadow = True
-    
-    page.Title = "Central de cadastros"
 
+    lv = ft.ListView(auto_scroll=True)
+
+    page.Title = "Central de cadastros"
     def pag_index(e): 
         if e == 0:
             page.controls.clear()
@@ -26,16 +27,16 @@ def main(page: ft.Page):
         if e == 2:
             page.controls.clear()
             cadastroPesquisa()
-
+    
     def btn_add(e):
         if pagina == 0:
-            page.add(ft.Row(controls = [ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]),ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]) ]))
+            page.add(ft.Row(controls = [ft.Column(controls = [ ft.Text("teste") ]),ft.Column(controls = [ ft.Text("teste") ]),ft.Column(controls = [ ft.Text("teste") ]) ]))
         if pagina == 1:
-            page.add(ft.Row(controls = [ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]),ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]) ]))
+            page.add(ft.Row(controls = [ft.Column(controls = [  ]) ]))
         if pagina == 2:
-            page.add(ft.Row(controls = [ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]),ft.Column(controls = [ft.Text(f"Pagina: {pagina}")]) ]))
-
+            page.add(ft.Row(controls = [ft.Column(controls = [  ]) ]))
     
+
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
@@ -50,8 +51,6 @@ def main(page: ft.Page):
         )
     
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500)
-    
-    footer = ft.Container(content=ft.Column(controls=[ft.Divider()]) )
 
     def cadastroProduto():
         global pagina,j
@@ -62,7 +61,8 @@ def main(page: ft.Page):
         for i in range(0,j):
             mid_sec = l.pro(i)
             page.add(mid_sec)
-        page.add(ft.Column(controls=[footer]))
+        page.add(ft.Divider(color=ft.colors.WHITE38))
+        page.add(lv)
 
     def cadastroPessoa():
         global pagina,j
@@ -73,7 +73,7 @@ def main(page: ft.Page):
         for i in range(0,j):
             mid_sec = l.pes(i)
             page.add(mid_sec)
-        page.add(ft.Column(controls=[footer]))
+        page.add(ft.Divider(color=ft.colors.WHITE38))
 
     def cadastroPesquisa():
         global pagina,j
@@ -84,10 +84,9 @@ def main(page: ft.Page):
         for i in range(0,j):
             mid_sec = l.peq(i)
             page.add(mid_sec)
-        page.add(ft.Column(controls=[footer]))
-        
+        page.add(ft.Divider(color=ft.colors.WHITE38))
+
     cadastroProduto()
-    
     page.update()
 
 ft.app(target=main)
