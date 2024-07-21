@@ -8,7 +8,7 @@ def pes(x):
     mid = ft.Column(col={"md":6}, controls=[ listapessoas["labels"][f"label{x}"], listapessoas["inputs"][f"input{x}"] ])
     return mid
 def peq(x):
-    mid = ft.Column(col={"md":6}, controls=[ listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"] ])
+    mid = ft.Column(col={"md":6}, controls=[ listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"] ],expand=True)
     return mid
 
 listaprod = {

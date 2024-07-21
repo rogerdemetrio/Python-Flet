@@ -11,10 +11,8 @@ def main(page: ft.Page):
     page.window.height = 920
     page.window.width = 480
     page.window.maximizable = False
-    page.window.resizable = False
+    #page.window.resizable = False
     page.window.shadow = True
-
-    lv = ft.ListView(auto_scroll=True)
 
     page.Title = "Central de cadastros"
     def pag_index(e): 
@@ -30,11 +28,21 @@ def main(page: ft.Page):
     
     def btn_add(e):
         if pagina == 0:
-            page.add(ft.Row(controls = [ft.Column(controls = [ ft.Text("teste") ]),ft.Column(controls = [ ft.Text("teste") ]),ft.Column(controls = [ ft.Text("teste") ]) ]))
+            dados = ft.Row()
+            for i in range(0,j):
+                dados.controls.append(ft.Text(i))
+            page.add(dados)
         if pagina == 1:
-            page.add(ft.Row(controls = [ft.Column(controls = [  ]) ]))
+            dados = ft.Row()
+            for i in range(0,j):
+                dados.controls.append(ft.Text(i))
+            page.add(dados)
         if pagina == 2:
-            page.add(ft.Row(controls = [ft.Column(controls = [  ]) ]))
+            dados = ft.Row()
+            dados_computados = []
+            for i in range(0,j):
+                dados.controls.append(dados_computados["input"+i])
+            page.add(dados)
     
 
     page.navigation_bar = ft.CupertinoNavigationBar(
@@ -54,36 +62,38 @@ def main(page: ft.Page):
 
     def cadastroProduto():
         global pagina,j
+        resp = ft.ResponsiveRow()
         pagina = 0
         j = 4
         titulo = ft.Text("Cadastro de produtos",size=20)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
         for i in range(0,j):
-            mid_sec = l.pro(i)
-            page.add(mid_sec)
+            resp.controls.append(l.pro(i))
+        page.add(resp)
         page.add(ft.Divider(color=ft.colors.WHITE38))
-        page.add(lv)
 
     def cadastroPessoa():
         global pagina,j
+        resp = ft.ResponsiveRow()
         pagina = 1
         j = 2
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=20))
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
         for i in range(0,j):
-            mid_sec = l.pes(i)
-            page.add(mid_sec)
+            resp.controls.append(l.pes(i))
+        page.add(resp)
         page.add(ft.Divider(color=ft.colors.WHITE38))
 
     def cadastroPesquisa():
         global pagina,j
+        resp = ft.ResponsiveRow()
         pagina = 2
         j = 5
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
         for i in range(0,j):
-            mid_sec = l.peq(i)
-            page.add(mid_sec)
+            resp.controls.append(l.peq(i))
+        page.add(resp)
         page.add(ft.Divider(color=ft.colors.WHITE38))
 
     cadastroProduto()
