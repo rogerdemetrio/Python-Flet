@@ -2,7 +2,7 @@ import flet as ft
 
 
 class InputField(ft.TextField):
-    def __init__(self,label,multiline=False,min_lines=1,max_lines=1):
+    def __init__(self,label="",multiline=False,min_lines=1,max_lines=1):
         super().__init__()
         self.label=label
         self.bgcolor=ft.colors.GREY_800

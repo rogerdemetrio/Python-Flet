@@ -28,23 +28,16 @@ def main(page: ft.Page):
     
     def btn_add(e):
         if pagina == 0:
-            dados = ft.Row()
-            for i in range(0,j):
-                dados.controls.append(ft.Text(i))
-            page.add(dados)
+            for input_value in col.controls:
+                div.controls.append(input_value.value)
+                print(div.controls)
         if pagina == 1:
-            dados = ft.Row()
             for i in range(0,j):
-                dados.controls.append(ft.Text(i))
-            page.add(dados)
+                pass
         if pagina == 2:
-            dados = ft.Row()
-            dados_computados = []
             for i in range(0,j):
-                dados.controls.append(dados_computados["input"+i])
-            page.add(dados)
+                pass
     
-
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
@@ -61,16 +54,17 @@ def main(page: ft.Page):
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500)
 
     def cadastroProduto():
-        global pagina,j
+        global pagina,j,col,div
         resp = ft.ResponsiveRow()
+        div = ft.Column()
         pagina = 0
         j = 4
+        col = ft.Column(col={"md":6},controls=[l.listaprod["inputs"][f"input{x}"] for x in range(0,j)])
         titulo = ft.Text("Cadastro de produtos",size=20)
+        resp.controls.append(col)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
-        for i in range(0,j):
-            resp.controls.append(l.pro(i))
         page.add(resp)
-        page.add(ft.Divider(color=ft.colors.WHITE38))
+        page.add(ft.Column(controls=[ft.Divider(),div]))
 
     def cadastroPessoa():
         global pagina,j
