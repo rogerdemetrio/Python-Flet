@@ -63,9 +63,9 @@ def main(page: ft.Page):
     def cadastroProduto():
         global pagina,body,my_table
         pagina = 0
-        titulo = ft.Text("Cadastro de produtos",size=20)
-        body = ft.Column(col={"md":6},controls=[l.listaprod["inputs"][f"input{x}"] for x in range(4)])
-        my_table = ft.DataTable(columns=[l.listaprod["colunas"][f"coluna{x}"] for x in range(4)],rows=[],)
+        titulo = ft.Text("Cadastro de Produtos",size=20)
+        body = ft.Column(controls=[l.listaprod["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listaprod))])
+        my_table = ft.DataTable(columns=[l.listaprod["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listaprod))],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
@@ -73,19 +73,19 @@ def main(page: ft.Page):
     def cadastroPessoa():
         global pagina,body,my_table
         pagina = 1
-        titulo = ft.Container(ft.Text("Cadastro de pessoa",size=20))
-        body = ft.Column(col={"md":6},controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(2)])
-        my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(2)],rows=[],)
+        titulo = ft.Container(ft.Text("Cadastro de Pessoa",size=20))
+        body = ft.Column(col={"md":6},controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapessoas))])
+        my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapessoas))],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
-        
+
     def cadastroPesquisa():
         global pagina,body,my_table
         pagina = 2
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
-        body = ft.Column(col={"md":6},controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(5)])
-        my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(5)],rows=[],)
+        body = ft.Column(col={"md":6},controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapesquisas))])
+        my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapesquisas))],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )

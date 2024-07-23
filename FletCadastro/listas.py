@@ -1,6 +1,8 @@
 import flet as ft
 import classes as c
 
+
+
 listaprod = {
     "colunas":{
         "coluna0":ft.DataColumn(ft.Text("nm_prod")),
@@ -40,3 +42,6 @@ listapesquisas={
         "input3" : c.InputField(label="Tempo que compra o produto no concorrente"),
         "input4" : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
         }}  
+
+def conta_lista(x):
+    return (len(x["colunas"]))
