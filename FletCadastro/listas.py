@@ -12,11 +12,11 @@ def peq(x):
     return mid
 
 listaprod = {
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome do produto:",size=12)),
-        "label1":ft.Container(ft.Text("Valor do produto:",size=12)),
-        "label2":ft.Container(ft.Text("Descrição do produto:",size=12)),
-        "label3":ft.Container(ft.Text("Marca do produto:",size=12))
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nm_prod")),
+        "coluna1":ft.DataColumn(ft.Text("vl_prod")),
+        "coluna2":ft.DataColumn(ft.Text("desc_prod")),
+        "coluna3":ft.DataColumn(ft.Text("marca"))
         },
     "inputs":{
         "input0" : c.InputField(label="nome do produto"),
@@ -26,9 +26,9 @@ listaprod = {
         }}
 
 listapessoas={        
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome da pessoa:",size=12)),
-        "label1":ft.Container(ft.Text("Sobrenome da pessoa:",size=12))
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nm_pessoa")),
+        "coluna1":ft.DataColumn(ft.Text("sob_pessoa")),
         },
     "inputs":{
         "input0" : c.InputField(label="nome da pessoa"),
@@ -36,12 +36,12 @@ listapessoas={
         }}
 
 listapesquisas={
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome do produto concorrente:",size=12)),
-        "label1":ft.Container(ft.Text("Valor do produto concorrente:",size=12)),
-        "label2":ft.Container(ft.Text("Marca do produto concorrente:",size=12)),
-        "label3":ft.Container(ft.Text("A quanto tempo compra o produto concorrente:",size=12)),
-        "label4":ft.Container(ft.Text("Observação:",size=12))
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nome_conc")),
+        "coluna1":ft.DataColumn(ft.Text("vl_conc")),
+        "coluna2":ft.DataColumn(ft.Text("marca_conc")),
+        "coluna3":ft.DataColumn(ft.Text("dias_conc")),
+        "coluna4":ft.DataColumn(ft.Text("obs")),
         },
     "inputs":{
         "input0" : c.InputField(label="nome do produto concorrente"),
