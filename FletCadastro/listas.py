@@ -8,7 +8,7 @@ def pes(x):
     mid = ft.Column(col={"md":6}, controls=[ listapessoas["labels"][f"label{x}"], listapessoas["inputs"][f"input{x}"] ])
     return mid
 def peq(x):
-    mid = ft.Column(col={"md":6}, controls=[ listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"] ],expand=True)
+    mid = ft.Column(col={"md":6}, controls=[ listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"] ])
     return mid
 
 listaprod = {
@@ -19,10 +19,10 @@ listaprod = {
         "label3":ft.Container(ft.Text("Marca do produto:",size=12))
         },
     "inputs":{
-        "input0" : c.InputField(label="Digite o nome do produto"),
-        "input1" : c.InputField(label="Digite o valor do produto"),
-        "input2" : c.InputField(label="Digite a descrição do produto"),
-        "input3" : c.InputField(label="Digite a marca do produto"),
+        "input0" : c.InputField(label="nome do produto"),
+        "input1" : c.InputField(label="valor do produto"),
+        "input2" : c.InputField(label="descrição do produto"),
+        "input3" : c.InputField(label="marca do produto"),
         }}
 
 listapessoas={        
@@ -31,8 +31,8 @@ listapessoas={
         "label1":ft.Container(ft.Text("Sobrenome da pessoa:",size=12))
         },
     "inputs":{
-        "input0" : c.InputField(label="Digite o nome da pessoa"),
-        "input1" : c.InputField(label="Digite o sobrenome da pessoa")
+        "input0" : c.InputField(label="nome da pessoa"),
+        "input1" : c.InputField(label="sobrenome da pessoa")
         }}
 
 listapesquisas={
@@ -44,9 +44,9 @@ listapesquisas={
         "label4":ft.Container(ft.Text("Observação:",size=12))
         },
     "inputs":{
-        "input0" : c.InputField(label="Digite o nome do produto concorrente"),
-        "input1" : c.InputField(label="Digite o valor do produto concorrente"),
-        "input2" : c.InputField(label="Digite a marca do produto concorrente"),
-        "input3" : c.InputField(label="Digite o tempo em meses"),
-        "input4" : c.InputField(label="Digite a observação",multiline=True,min_lines=3,max_lines=6),
+        "input0" : c.InputField(label="nome do produto concorrente"),
+        "input1" : c.InputField(label="valor do produto concorrente"),
+        "input2" : c.InputField(label="marca do produto concorrente"),
+        "input3" : c.InputField(label="Tempo que compra o produto no concorrente"),
+        "input4" : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
         }}  

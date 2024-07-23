@@ -4,14 +4,14 @@ import listas as l
 
 def main(page: ft.Page):
 # Main
-    #page.window.center()
+    page.window.center()
     header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
     page.bgcolor = ft.colors.GREY_900
     page.padding = 20
     page.window.height = 920
     page.window.width = 480
     page.window.maximizable = False
-    #page.window.resizable = False
+    page.window.resizable = False
     page.window.shadow = True
 
     page.Title = "Central de cadastros"
@@ -28,15 +28,27 @@ def main(page: ft.Page):
     
     def btn_add(e):
         if pagina == 0:
-            for input_value in col.controls:
-                div.controls.append(input_value.value)
-                print(div.controls)
+            for input_value in body.controls:
+                coluna = ft.Column()
+                if input_value.value != "":
+                    coluna.controls.append(ft.Text(input_value.value))
+                    page.add(coluna)
+                
         if pagina == 1:
-            for i in range(0,j):
-                pass
+            for input_value in body.controls:
+                coluna = ft.Column()
+                if input_value.value != "":
+                    coluna.controls.append(ft.Text(input_value.value))
+                    page.add(coluna)
+                
         if pagina == 2:
-            for i in range(0,j):
-                pass
+            for input_value in body.controls:
+                coluna = ft.Column()
+                if input_value.value != "":
+                    coluna.controls.append(ft.Text(input_value.value))
+                    page.add(coluna)
+                
+                
     
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
@@ -54,41 +66,25 @@ def main(page: ft.Page):
     page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500)
 
     def cadastroProduto():
-        global pagina,j,col,div
-        resp = ft.ResponsiveRow()
-        div = ft.Column()
+        global pagina,body
         pagina = 0
-        j = 4
-        col = ft.Column(col={"md":6},controls=[l.listaprod["inputs"][f"input{x}"] for x in range(0,j)])
         titulo = ft.Text("Cadastro de produtos",size=20)
-        resp.controls.append(col)
-        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
-        page.add(resp)
-        page.add(ft.Column(controls=[ft.Divider(),div]))
+        body = ft.Column([l.listaprod["inputs"][f"input{x}"] for x in range(4)],col={"md":6})
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
 
     def cadastroPessoa():
-        global pagina,j
-        resp = ft.ResponsiveRow()
+        global pagina,body
         pagina = 1
-        j = 2
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=20))
-        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
-        for i in range(0,j):
-            resp.controls.append(l.pes(i))
-        page.add(resp)
-        page.add(ft.Divider(color=ft.colors.WHITE38))
+        body = ft.Column(col={"md":6},controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(2)])
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
 
     def cadastroPesquisa():
-        global pagina,j
-        resp = ft.ResponsiveRow()
+        global pagina,body
         pagina = 2
-        j = 5
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
-        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]))
-        for i in range(0,j):
-            resp.controls.append(l.peq(i))
-        page.add(resp)
-        page.add(ft.Divider(color=ft.colors.WHITE38))
+        body = ft.Column(col={"md":6},controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(5)])
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
 
     cadastroProduto()
     page.update()
