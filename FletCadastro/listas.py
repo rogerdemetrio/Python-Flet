@@ -1,16 +1,6 @@
 import flet as ft
 import classes as c
 
-def pro(x):
-    mid = ft.Column(col={"md":6}, controls=[ listaprod["labels"][f"label{x}"], listaprod["inputs"][f"input{x}"] ])
-    return mid
-def pes(x):
-    mid = ft.Column(col={"md":6}, controls=[ listapessoas["labels"][f"label{x}"], listapessoas["inputs"][f"input{x}"] ])
-    return mid
-def peq(x):
-    mid = ft.Column(col={"md":6}, controls=[ listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"] ])
-    return mid
-
 listaprod = {
     "colunas":{
         "coluna0":ft.DataColumn(ft.Text("nm_prod")),

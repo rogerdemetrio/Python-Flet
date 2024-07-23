@@ -2,6 +2,7 @@ import flet as ft
 import classes as c
 import listas as l
 
+#TODO -> Remover repetições 
 def main(page: ft.Page):
     
     header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
@@ -64,9 +65,9 @@ def main(page: ft.Page):
         pagina = 0
         titulo = ft.Text("Cadastro de produtos",size=20)
         body = ft.Column(col={"md":6},controls=[l.listaprod["inputs"][f"input{x}"] for x in range(4)])
+        my_table = ft.DataTable(columns=[l.listaprod["colunas"][f"coluna{x}"] for x in range(4)],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
-        my_table = ft.DataTable(columns=[l.listaprod["colunas"][f"coluna{x}"] for x in range(4)],rows=[],)
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
 
     def cadastroPessoa():
@@ -74,18 +75,19 @@ def main(page: ft.Page):
         pagina = 1
         titulo = ft.Container(ft.Text("Cadastro de pessoa",size=20))
         body = ft.Column(col={"md":6},controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(2)])
+        my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(2)],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
-        my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(2)],rows=[],)
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
+        
     def cadastroPesquisa():
         global pagina,body,my_table
         pagina = 2
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
         body = ft.Column(col={"md":6},controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(5)])
+        my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(5)],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
-        my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(5)],rows=[],)
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
 
     cadastroProduto()
