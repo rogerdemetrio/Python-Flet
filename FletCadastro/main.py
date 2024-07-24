@@ -13,7 +13,8 @@ engine = create_engine(CONN, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-#TODO -> Remover repetições 
+#TODO -> Remover repetições
+#TODO -> Criar classes com a bagunça abaixo
 def main(page: ft.Page):
     
     header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
@@ -63,6 +64,7 @@ def main(page: ft.Page):
             tb = Pesquisa(**tabela)
             session.add(tb)
             session.commit()
+#TODO -> Mostrar informação do banco na tela
 
             #new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
             #my_table.rows.append(new_row)
