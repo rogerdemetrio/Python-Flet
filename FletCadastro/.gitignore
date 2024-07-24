@@ -1,6 +1,6 @@
 .pyc
+bancoCadastro.db
 /__pycache__
 /.vscode
 /.venv
 /testes.py
-.db
