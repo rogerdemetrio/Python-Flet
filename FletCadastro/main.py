@@ -41,24 +41,32 @@ def main(page: ft.Page):
             cadastroPesquisa()
     
     def btn_add(e):
+        i = [inputText.value for inputText in body.controls]
+        tabela = {}
         if pagina == 0:
-            i = [inputText.value for inputText in body.controls]
-            tabela = {}
-            for x in range(4):            
+            for x in range(l.conta_lista(l.listaprod)):
                 tabela.update({str(l.listaprod["col"][x]):str(i[x])})
             tb = Produto(**tabela)
             session.add(tb)
             session.commit()
 
         if pagina == 1:
-            new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
-            my_table.rows.append(new_row)
-            my_table.update()
+            for x in range(l.conta_lista(l.listapessoas)):
+                tabela.update({str(l.listapessoas["col"][x]):str(i[x])})
+            tb = Pessoa(**tabela)
+            session.add(tb)
+            session.commit()
                 
         if pagina == 2:
-            new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
-            my_table.rows.append(new_row)
-            my_table.update()
+            for x in range(l.conta_lista(l.listapesquisas)):
+                tabela.update({str(l.listapesquisas["col"][x]):str(i[x])})
+            tb = Pesquisa(**tabela)
+            session.add(tb)
+            session.commit()
+
+            #new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
+            #my_table.rows.append(new_row)
+            #my_table.update()
 
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,

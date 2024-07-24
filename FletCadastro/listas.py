@@ -28,9 +28,9 @@ listapessoas={
         "coluna0":ft.DataColumn(ft.Text("nm_pessoa")),
         "coluna1":ft.DataColumn(ft.Text("sob_pessoa")),
         },   
-        "col":{
-        "nm_pessoa":"",
-        "sob_pessoa":"",
+    "col":{
+        0:"nm_pessoa",
+        1:"sob_pessoa",
         },
     "inputs":{
         "input0" : c.InputField(label="nome da pessoa"),
@@ -46,11 +46,11 @@ listapesquisas={
         "coluna4":ft.DataColumn(ft.Text("obs")),
         },
     "col":{
-        "nome_conc":"",
-        "vl_conc":"",
-        "marca_conc":"",
-        "dias_conc":"",
-        "obs":"",
+        0:"nome_conc",
+        1:"vl_conc",
+        2:"marca_conc",
+        3:"dias_conc",
+        4:"obs",
         },
     "inputs":{
         "input0" : c.InputField(label="nome do produto concorrente"),
