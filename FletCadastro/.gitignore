@@ -3,4 +3,4 @@
 /.vscode
 /.venv
 /testes.py
-.db
+bancoCadastro.db
