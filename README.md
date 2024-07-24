@@ -7,4 +7,6 @@
 >- [x] Cadastro de produtos
 >- [x] Cadastro de pessoas
 >- [x] Cadastro de pesquisa
->- [ ] Gravar informações em banco de dados
+>- [x] Gravar informações em banco de dados
+>- [ ] Mostrar as informações do banco em tela
+>- [ ] Buscar informações em tela direto do banco
