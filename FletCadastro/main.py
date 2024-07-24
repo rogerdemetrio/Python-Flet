@@ -1,13 +1,35 @@
 import flet as ft 
-import classes as c
+#import classes as c
 import listas as l
+from models import Produto,Pessoa,Pesquisa
 
-#TODO: Criar classe de modulos de cadastro
+from sqlalchemy.sql import text,column
+from sqlalchemy import create_engine
+from sqlalchemy.orm import *
+
+CONN = "sqlite:///bancoCadastro.db"
+
+engine = create_engine(CONN, echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
+
+#TODO -> Remover repetições
+#TODO -> Criar classes com a bagunça abaixo
 def main(page: ft.Page):
-    page.Title = "Central de cadastros"
-
-# Main
     
+    header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
+    
+    # Padrões da pagina alterados para trazer em forma de aplicativo para smartphone "simulado"
+    page.window.center()
+    page.bgcolor = ft.colors.GREY_900
+    page.padding = 20
+    page.window.height = 920
+    page.window.width = 480
+    page.window.maximizable = False
+    page.window.resizable = False
+    page.window.shadow = True
+    page.title = "Central de cadastros"
+
     def pag_index(e): 
         if e == 0:
             page.controls.clear()
@@ -18,9 +40,35 @@ def main(page: ft.Page):
         if e == 2:
             page.controls.clear()
             cadastroPesquisa()
+    
+    def btn_add(e):
+        i = [inputText.value for inputText in body.controls]
+        tabela = {}
+        if pagina == 0:
+            for x in range(l.conta_lista(l.listaprod)):
+                tabela.update({str(l.listaprod["col"][x]):str(i[x])})
+            tb = Produto(**tabela)
+            session.add(tb)
+            session.commit()
 
-    header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=36),alignment=ft.alignment.center), ft.Divider()])
-    footer = ft.Column([ft.Divider(),ft.Text("Footer")])
+        if pagina == 1:
+            for x in range(l.conta_lista(l.listapessoas)):
+                tabela.update({str(l.listapessoas["col"][x]):str(i[x])})
+            tb = Pessoa(**tabela)
+            session.add(tb)
+            session.commit()
+                
+        if pagina == 2:
+            for x in range(l.conta_lista(l.listapesquisas)):
+                tabela.update({str(l.listapesquisas["col"][x]):str(i[x])})
+            tb = Pesquisa(**tabela)
+            session.add(tb)
+            session.commit()
+#TODO -> Mostrar informação do banco na tela
+
+            #new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
+            #my_table.rows.append(new_row)
+            #my_table.update()
 
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
@@ -35,55 +83,40 @@ def main(page: ft.Page):
             ],
         )
     
-    def btn_add(e):
-        print("Clicou")
-        #page.add()
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500)
 
     def cadastroProduto():
-        i = 4
-        titulo = ft.Text("Cadastro de produtos",size=24)
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.pro(0)),
-                        ft.Column(col={"md": 6}, controls = l.pro(1)),
-                        ft.Column(col={"md": 6}, controls = l.pro(2)),
-                        ft.Column(col={"md": 6}, controls = l.pro(3)),
-                    ])
-            
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
-
-    def cadastroPessoa():
-        i = 2
-        titulo = ft.Container(ft.Text("Cadastro de pessoa",size=24))
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.pes(0)),
-                        ft.Column(col={"md": 6}, controls = l.pes(1)),
-                    ])
-            
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
-
-    def cadastroPesquisa():
-        i = 5
-        titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=24))
-        btn = ft.Container(content = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500), alignment=ft.alignment.center_right)
-        mid_sec = ft.ResponsiveRow(controls=[
-                        ft.Column(col={"md": 6}, controls = l.peq(0)),
-                        ft.Column(col={"md": 6}, controls = l.peq(1)),
-                        ft.Column(col={"md": 6}, controls = l.peq(2)),
-                        ft.Column(col={"md": 6}, controls = l.peq(3)),
-                        ft.Column(col={"md": 12}, controls = l.peq(4)),
-                    ])
-        mid = ft.Column([titulo,mid_sec,btn])
-        corpo = c.CorpoContainer(content = ft.Column(controls=[header, mid, footer]))
-        page.add(corpo)
+        global pagina,body,my_table
+        pagina = 0
+        titulo = ft.Text("Cadastro de Produtos",size=20)
+        body = ft.Column(controls=[l.listaprod["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listaprod))])
+        my_table = ft.DataTable(columns=[l.listaprod["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listaprod))],rows=[],)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
+                 ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
+        page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
         
 
-    cadastroProduto()
+    def cadastroPessoa():
+        global pagina,body,my_table
+        pagina = 1
+        titulo = ft.Container(ft.Text("Cadastro de Pessoa",size=20))
+        body = ft.Column(controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapessoas))])
+        my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapessoas))],rows=[],)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
+                 ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
+        page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
 
+    def cadastroPesquisa():
+        global pagina,body,my_table
+        pagina = 2
+        titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
+        body = ft.Column(controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapesquisas))])
+        my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapesquisas))],rows=[],)
+        page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
+                 ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
+        page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
+
+    cadastroProduto()
     page.update()
+
 ft.app(target=main)

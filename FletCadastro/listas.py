@@ -1,52 +1,64 @@
 import flet as ft
 import classes as c
 
-def pro(x):
-    mid = listaprod["labels"][f"label{x}"], listaprod["inputs"][f"input{x}"]
-    return mid    
-def pes(x):
-    mid = listapessoas["labels"][f"label{x}"], listapessoas["inputs"][f"input{x}"]
-    return mid
-def peq(x):
-    mid = listapesquisas["labels"][f"label{x}"], listapesquisas["inputs"][f"input{x}"]
-    return mid
+
 
 listaprod = {
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome do produto:",size=12)),
-        "label1":ft.Container(ft.Text("Valor do produto:",size=12)),
-        "label2":ft.Container(ft.Text("Descrição do produto:",size=12)),
-        "label3":ft.Container(ft.Text("Marca do produto:",size=12))
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nm_prod")),
+        "coluna1":ft.DataColumn(ft.Text("vl_prod")),
+        "coluna2":ft.DataColumn(ft.Text("desc_prod")),
+        "coluna3":ft.DataColumn(ft.Text("marca"))
+        },
+    "col":{
+        0:"nm_prod",
+        1:"vl_prod",
+        2:"desc_prod",
+        3:"marca"
         },
     "inputs":{
-        "input0" : c.InputField(label="Digite o nome do produto"),
-        "input1" : c.InputField(label="Digite o valor do produto"),
-        "input2" : c.InputField(label="Digite a descrição do produto"),
-        "input3" : c.InputField(label="Digite a marca do produto"),
-        }
-    }
-listapessoas={        
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome da pessoa:",size=12)),
-        "label1":ft.Container(ft.Text("Sobrenome da pessoa:",size=12))
-        },
-    "inputs":{
-        "input0" : c.InputField(label="Digite o nome da pessoa"),
-        "input1" : c.InputField(label="Digite o sobrenome da pessoa")
+        "input0" : c.InputField(label="nome do produto"),
+        "input1" : c.InputField(label="valor do produto"),
+        "input2" : c.InputField(label="descrição do produto"),
+        "input3" : c.InputField(label="marca do produto"),
         }}
-listapesquisas={
-    "labels":{
-        "label0":ft.Container(ft.Text("Nome do produto concorrente:",size=12)),
-        "label1":ft.Container(ft.Text("Valor do produto concorrente:",size=12)),
-        "label2":ft.Container(ft.Text("Marca do produto concorrente:",size=12)),
-        "label3":ft.Container(ft.Text("A quanto tempo compra o produto concorrente:",size=12)),
-        "label4":ft.Container(ft.Text("Observação:",size=12))
+
+listapessoas={        
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nm_pessoa")),
+        "coluna1":ft.DataColumn(ft.Text("sob_pessoa")),
+        },   
+    "col":{
+        0:"nm_pessoa",
+        1:"sob_pessoa",
         },
     "inputs":{
-        "input0" : c.InputField(label="Digite o nome do produto concorrente"),
-        "input1" : c.InputField(label="Digite o valor do produto concorrente"),
-        "input2" : c.InputField(label="Digite a marca do produto concorrente"),
-        "input3" : c.InputField(label="Digite o tempo em meses"),
-        "input4" : c.InputField(label="Digite a observação",multiline=True,min_lines=3,max_lines=6),
-        }
-}  
+        "input0" : c.InputField(label="nome da pessoa"),
+        "input1" : c.InputField(label="sobrenome da pessoa")
+        }}
+
+listapesquisas={
+    "colunas":{
+        "coluna0":ft.DataColumn(ft.Text("nome_conc")),
+        "coluna1":ft.DataColumn(ft.Text("vl_conc")),
+        "coluna2":ft.DataColumn(ft.Text("marca_conc")),
+        "coluna3":ft.DataColumn(ft.Text("dias_conc")),
+        "coluna4":ft.DataColumn(ft.Text("obs")),
+        },
+    "col":{
+        0:"nome_conc",
+        1:"vl_conc",
+        2:"marca_conc",
+        3:"dias_conc",
+        4:"obs",
+        },
+    "inputs":{
+        "input0" : c.InputField(label="nome do produto concorrente"),
+        "input1" : c.InputField(label="valor do produto concorrente"),
+        "input2" : c.InputField(label="marca do produto concorrente"),
+        "input3" : c.InputField(label="Tempo que compra o produto no concorrente"),
+        "input4" : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
+        }}  
+
+def conta_lista(x):
+    return (len(x["colunas"]))
