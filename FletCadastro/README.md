@@ -1,6 +1,10 @@
 ## Central de cadastros em FLET
 
-Hoje podemos cadastrar: WIP
->- [ ] Produtos, com seus preços e detalhes
->- [ ] Pessoas, com seus endereços e contatos
->- [ ] Pesquisas de mercado customizadas
+Hoje podemos cadastrar:
+>- [x] Produtos, com seus preços e detalhes
+>- [x] Pessoas, com seus endereços e contatos
+>- [x] Pesquisas de mercado customizadas
+E tambem:
+>- [x] Salvar essas informações num banco SQLite
+>- [ ] Mostrar as informações salvas no banco
+>- [ ] Buscar informações salvas no banco
