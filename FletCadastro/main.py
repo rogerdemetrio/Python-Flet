@@ -1,6 +1,17 @@
 import flet as ft 
-import classes as c
+#import classes as c
 import listas as l
+from models import Produto,Pessoa,Pesquisa
+
+from sqlalchemy.sql import text,column
+from sqlalchemy import create_engine
+from sqlalchemy.orm import *
+
+CONN = "sqlite:///bancoCadastro.db"
+
+engine = create_engine(CONN, echo=True)
+Session = sessionmaker(bind=engine)
+session = Session()
 
 #TODO -> Remover repetições 
 def main(page: ft.Page):
@@ -31,9 +42,13 @@ def main(page: ft.Page):
     
     def btn_add(e):
         if pagina == 0:
-            new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
-            my_table.rows.append(new_row)
-            my_table.update()
+            i = [inputText.value for inputText in body.controls]
+            tabela = {}
+            for x in range(4):            
+                tabela.update({str(l.listaprod["col"][x]):str(i[x])})
+            tb = Produto(**tabela)
+            session.add(tb)
+            session.commit()
 
         if pagina == 1:
             new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
@@ -69,12 +84,13 @@ def main(page: ft.Page):
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
         page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
+        
 
     def cadastroPessoa():
         global pagina,body,my_table
         pagina = 1
         titulo = ft.Container(ft.Text("Cadastro de Pessoa",size=20))
-        body = ft.Column(col={"md":6},controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapessoas))])
+        body = ft.Column(controls=[l.listapessoas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapessoas))])
         my_table = ft.DataTable(columns=[l.listapessoas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapessoas))],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
@@ -84,7 +100,7 @@ def main(page: ft.Page):
         global pagina,body,my_table
         pagina = 2
         titulo = ft.Container(ft.Text("Cadastro de Pesquisa",size=20))
-        body = ft.Column(col={"md":6},controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapesquisas))])
+        body = ft.Column(controls=[l.listapesquisas["inputs"][f"input{x}"] for x in range(l.conta_lista(l.listapesquisas))])
         my_table = ft.DataTable(columns=[l.listapesquisas["colunas"][f"coluna{x}"] for x in range(l.conta_lista(l.listapesquisas))],rows=[],)
         page.add(ft.Column(controls=[header]),ft.Column(controls=[titulo]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))

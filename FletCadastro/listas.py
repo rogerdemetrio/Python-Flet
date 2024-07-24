@@ -10,6 +10,12 @@ listaprod = {
         "coluna2":ft.DataColumn(ft.Text("desc_prod")),
         "coluna3":ft.DataColumn(ft.Text("marca"))
         },
+    "col":{
+        0:"nm_prod",
+        1:"vl_prod",
+        2:"desc_prod",
+        3:"marca"
+        },
     "inputs":{
         "input0" : c.InputField(label="nome do produto"),
         "input1" : c.InputField(label="valor do produto"),
@@ -21,6 +27,10 @@ listapessoas={
     "colunas":{
         "coluna0":ft.DataColumn(ft.Text("nm_pessoa")),
         "coluna1":ft.DataColumn(ft.Text("sob_pessoa")),
+        },   
+        "col":{
+        "nm_pessoa":"",
+        "sob_pessoa":"",
         },
     "inputs":{
         "input0" : c.InputField(label="nome da pessoa"),
@@ -34,6 +44,13 @@ listapesquisas={
         "coluna2":ft.DataColumn(ft.Text("marca_conc")),
         "coluna3":ft.DataColumn(ft.Text("dias_conc")),
         "coluna4":ft.DataColumn(ft.Text("obs")),
+        },
+    "col":{
+        "nome_conc":"",
+        "vl_conc":"",
+        "marca_conc":"",
+        "dias_conc":"",
+        "obs":"",
         },
     "inputs":{
         "input0" : c.InputField(label="nome do produto concorrente"),
