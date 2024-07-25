@@ -1,80 +1,33 @@
 import flet as ft 
-#import classes as c
 import listas as l
-from models import Produto,Pessoa,Pesquisa
-
-from sqlalchemy.sql import text,column
-from sqlalchemy import create_engine
-from sqlalchemy.orm import *
-
-CONN = "sqlite:///bancoCadastro.db"
-
-engine = create_engine(CONN, echo=True)
-Session = sessionmaker(bind=engine)
-session = Session()
+import models as md
 
 #TODO -> Remover repetições
 #TODO -> Criar classes com a bagunça abaixo
+#TODO -> Mostrar informação do banco na tela
+
 def main(page: ft.Page):
     
     header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
     
     # Padrões da pagina alterados para trazer em forma de aplicativo para smartphone "simulado"
+    page.title = "Central de cadastros"
+    page.theme = ft.Theme(color_scheme_seed="green")
     page.window.center()
-    page.bgcolor = ft.colors.GREY_900
+    page.bgcolor = ft.colors.GREY_700
     page.padding = 20
     page.window.height = 920
     page.window.width = 480
     page.window.maximizable = False
     page.window.resizable = False
     page.window.shadow = True
-    page.title = "Central de cadastros"
-
-    def pag_index(e): 
-        if e == 0:
-            page.controls.clear()
-            cadastroProduto()
-        if e == 1:
-            page.controls.clear()
-            cadastroPessoa()
-        if e == 2:
-            page.controls.clear()
-            cadastroPesquisa()
-    
-    def btn_add(e):
-        i = [inputText.value for inputText in body.controls]
-        tabela = {}
-        if pagina == 0:
-            for x in range(l.conta_lista(l.listaprod)):
-                tabela.update({str(l.listaprod["col"][x]):str(i[x])})
-            tb = Produto(**tabela)
-            session.add(tb)
-            session.commit()
-
-        if pagina == 1:
-            for x in range(l.conta_lista(l.listapessoas)):
-                tabela.update({str(l.listapessoas["col"][x]):str(i[x])})
-            tb = Pessoa(**tabela)
-            session.add(tb)
-            session.commit()
-                
-        if pagina == 2:
-            for x in range(l.conta_lista(l.listapesquisas)):
-                tabela.update({str(l.listapesquisas["col"][x]):str(i[x])})
-            tb = Pesquisa(**tabela)
-            session.add(tb)
-            session.commit()
-#TODO -> Mostrar informação do banco na tela
-
-            #new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
-            #my_table.rows.append(new_row)
-            #my_table.update()
 
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
-            active_color=ft.colors.AMBER_700,
+            #active_color=ft.colors.GREEN_900,
             icon_size=36,
+            
             on_change=lambda e: pag_index(e.control.selected_index),
             destinations=[
                 ft.NavigationBarDestination(icon=ft.icons.FASTFOOD_OUTLINED,selected_icon=ft.icons.FASTFOOD, label="Produtos"),
@@ -83,7 +36,48 @@ def main(page: ft.Page):
             ],
         )
     
-    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add, bgcolor=ft.colors.GREEN_500)
+    
+    def pag_index(ev): 
+        if ev == 0:
+            page.controls.clear()
+            cadastroProduto()
+
+        if ev == 1:
+            page.controls.clear()
+            cadastroPessoa()
+
+        if ev == 2:
+            page.controls.clear()
+            cadastroPesquisa()
+
+    
+    def btn_add(ev):
+        i = [inputText.value for inputText in body.controls]
+        tabela = {}
+        if pagina == 0:
+            for x in range(l.conta_lista(l.listaprod)):
+                tabela.update({str(l.listaprod["col"][x]):str(i[x])})
+            tb = md.Produto(**tabela)
+
+        if pagina == 1:
+            for x in range(l.conta_lista(l.listapessoas)):
+                tabela.update({str(l.listapessoas["col"][x]):str(i[x])})
+            tb = md.Pessoa(**tabela)
+                
+        if pagina == 2:
+            for x in range(l.conta_lista(l.listapesquisas)):
+                tabela.update({str(l.listapesquisas["col"][x]):str(i[x])})
+            tb = md.Pesquisa(**tabela)
+        md.session.add(tb)
+        md.session.commit()
+
+        #new_row = ft.DataRow(cells=[ ft.DataCell(ft.Text(inputText.value)) for inputText in body.controls ])
+        #my_table.rows.append(new_row)
+        #my_table.update()
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add)
+    page.floating_action_button_location = ft.FloatingActionButtonLocation.END_FLOAT
+
+
 
     def cadastroProduto():
         global pagina,body,my_table
