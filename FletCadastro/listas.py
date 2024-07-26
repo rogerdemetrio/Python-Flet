@@ -1,8 +1,7 @@
 import flet as ft
 import classes as c
 
-
-
+# Dicionario dos itens que formam a tela principal e auxiliam no banco de dados
 lista = {
     0 : {
         "tit":ft.Text("Cadastro de Produtos",size=20),
@@ -49,5 +48,6 @@ lista = {
         } 
     } 
 
+# Conta a quantidade de colunas de cada dicionario
 def conta_lista(x):
     return (len(x["col"]))

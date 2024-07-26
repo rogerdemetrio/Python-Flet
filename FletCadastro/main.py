@@ -1,31 +1,30 @@
 import flet as ft 
 import listas as l
 import models as md
+import classes as cl
 
 #TODO -> Mostrar informação do banco na tela
 
 def main(page: ft.Page):
-    
-    header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), ft.Divider()])
-    
     # Padrões da pagina alterados para trazer em forma de aplicativo para smartphone "simulado"
-    page.title = "Central de cadastros"
-    page.theme = ft.Theme(color_scheme_seed="green")
-    page.window.center()
-    page.bgcolor = ft.colors.GREY_700
-    page.padding = 20
     page.window.height = 920
     page.window.width = 480
     page.window.maximizable = False
     page.window.resizable = False
     page.window.shadow = True
 
+    # Cores, titulo e alguns outros padrões basicos
+    page.title = "Central de cadastros"
+    page.theme = ft.Theme(color_scheme_seed="green")
+    page.bgcolor = ft.colors.GREY_700
+    page.window.center()
+    page.padding = 20
+    
+    # Tipo de navegação da pagina
     page.navigation_bar = ft.CupertinoNavigationBar(
             bgcolor=ft.colors.BLACK45,
             inactive_color=ft.colors.WHITE70,
-            #active_color=ft.colors.GREEN_900,
             icon_size=36,
-            
             on_change=lambda e: pag_index(e.control.selected_index),
             destinations=[
                 ft.NavigationBarDestination(icon=ft.icons.FASTFOOD_OUTLINED,selected_icon=ft.icons.FASTFOOD, label="Produtos"),
@@ -33,6 +32,9 @@ def main(page: ft.Page):
                 ft.NavigationBarDestination(icon=ft.icons.BOOK_OUTLINED,selected_icon=ft.icons.BOOK, label="Pesquisa"),
             ],
         )
+    
+    # Função que adiciona as informações no banco de dados 
+    # quando o botão flutuante é acionado
     def btn_add(ev):
         i = [inputText.value for inputText in body.controls]
         tabela = {}
@@ -47,18 +49,25 @@ def main(page: ft.Page):
         md.session.add(tb)
         md.session.commit()
 
-    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add)
-    page.floating_action_button_location = ft.FloatingActionButtonLocation.END_FLOAT
-
+    # Função de paginação, traz os elementos viziveis 
+    # (fora botão e navegação)
     def pag_index(ev):
         global body,pagina
+        header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), cl.LinhaDiv()])
         pagina = ev
         page.controls.clear() 
         body = ft.Column(controls=[l.lista[ev]["inputs"][x] for x in range(l.conta_lista(l.lista[ev]))])
         page.add(ft.Column(controls=[header]),ft.Column(controls=[l.lista[ev]["tit"]]),
-                 ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
- 
+                 ft.Column(controls=[body]),ft.Column(controls=[cl.LinhaDiv()]))
+
+    # Botão flutuante e posicionamento
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add)
+    page.floating_action_button_location = ft.FloatingActionButtonLocation.END_FLOAT
+    
+    # Carrega a primeira pagina ao abrir o aplicativo
     pag_index(0)
     page.update()
 
-ft.app(target=main)
+if __name__ == "__main__":
+    ft.app(target=main)
+    

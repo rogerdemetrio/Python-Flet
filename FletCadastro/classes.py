@@ -1,6 +1,6 @@
 import flet as ft 
 
-
+# Classe padrão dos TextField da main
 class InputField(ft.TextField):
     def __init__(self,label="",multiline=False,min_lines=1,max_lines=1):
         super().__init__()
@@ -15,10 +15,7 @@ class InputField(ft.TextField):
         #self.filled=True
         self.hint_text="Digite aqui"
 
-class CorpoContainer(ft.Container):
-    def __init__(self,content=[]):
+class LinhaDiv(ft.Divider):
+    def __init__(self):
         super().__init__()
-        self.content = content
-        self.padding = 5
-        self.margin = 5
-        self.expand = 2
+        self.color = ft.colors.WHITE54

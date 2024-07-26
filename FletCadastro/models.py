@@ -9,6 +9,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
 
+# Tabela Produto
 class Produto(Base):
     __tablename__ = "tbproduto"
     id = Column(Integer, primary_key=True)
@@ -17,12 +18,14 @@ class Produto(Base):
     desc_prod = Column(String(100))
     marca = Column(String(50))
 
+# Tabela Pessoa
 class Pessoa(Base):
     __tablename__ = "tbpessoa"
     id = Column(Integer, primary_key=True)
     nm_pessoa = Column(String(50))
     sob_pessoa = Column(String(100))
 
+# Tabela Pesquisa
 class Pesquisa(Base):
     __tablename__ = "tbpesquisa"
     id = Column(Integer, primary_key=True)
