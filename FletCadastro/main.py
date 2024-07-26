@@ -54,7 +54,7 @@ def main(page: ft.Page):
         global body,pagina
         pagina = ev
         page.controls.clear() 
-        body = ft.Column(controls=[l.lista[ev]["inputs"][f"input{x}"] for x in range(l.conta_lista(l.lista[ev]))])
+        body = ft.Column(controls=[l.lista[ev]["inputs"][x] for x in range(l.conta_lista(l.lista[ev]))])
         page.add(ft.Column(controls=[header]),ft.Column(controls=[l.lista[ev]["tit"]]),
                  ft.Column(controls=[body]),ft.Column(controls=[ft.Divider(color=ft.colors.WHITE38)]))
  
