@@ -2,8 +2,6 @@ import flet as ft
 import listas as l
 import models as md
 
-#TODO -> Remover repetições
-#TODO -> Criar classes com a bagunça abaixo
 #TODO -> Mostrar informação do banco na tela
 
 def main(page: ft.Page):
