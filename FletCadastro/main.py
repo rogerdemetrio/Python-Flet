@@ -1,5 +1,5 @@
 import flet as ft 
-import listas as l
+import dictionary as l
 import models as md
 import classes as cl
 
@@ -15,8 +15,8 @@ def main(page: ft.Page):
 
     # Cores, titulo e alguns outros padrões basicos
     page.title = "Central de cadastros"
-    page.theme = ft.Theme(color_scheme_seed="green")
-    page.bgcolor = ft.colors.GREY_700
+    page.theme = ft.Theme(color_scheme_seed="orange")
+    page.bgcolor = ft.colors.GREY_900
     page.window.center()
     page.padding = 20
     
@@ -53,7 +53,7 @@ def main(page: ft.Page):
     # (fora botão e navegação)
     def pag_index(ev):
         global body,pagina
-        header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",size=32),alignment=ft.alignment.center), cl.LinhaDiv()])
+        header = ft.Column([ft.Container(content=ft.Text("DemetrioVendas",theme_style=ft.TextThemeStyle.HEADLINE_LARGE),alignment=ft.alignment.center), cl.LinhaDiv()])
         pagina = ev
         page.controls.clear() 
         body = ft.Column(controls=[l.lista[ev]["inputs"][x] for x in range(l.conta_lista(l.lista[ev]))])
@@ -70,4 +70,3 @@ def main(page: ft.Page):
 
 if __name__ == "__main__":
     ft.app(target=main)
-    
