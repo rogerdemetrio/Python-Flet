@@ -13,10 +13,10 @@ lista = {
             3:"marca"
             },
         "inputs":{
-            "input0" : c.InputField(label="Nome do produto"),
-            "input1" : c.InputField(label="Valor do produto"),
-            "input2" : c.InputField(label="Descrição do produto"),
-            "input3" : c.InputField(label="marca do produto"),
+            0 : c.InputField(label="Nome do produto"),
+            1 : c.InputField(label="Valor do produto"),
+            2 : c.InputField(label="Descrição do produto"),
+            3 : c.InputField(label="marca do produto"),
             }
         },
     1 : {  
@@ -26,8 +26,8 @@ lista = {
             1:"sob_pessoa",
             },
         "inputs":{
-            "input0" : c.InputField(label="nome da pessoa"),
-            "input1" : c.InputField(label="sobrenome da pessoa")
+            0 : c.InputField(label="nome da pessoa"),
+            1 : c.InputField(label="sobrenome da pessoa")
             }
         },
     2 : {
@@ -40,11 +40,11 @@ lista = {
             4:"obs",
             },
         "inputs":{
-            "input0" : c.InputField(label="nome do produto concorrente"),
-            "input1" : c.InputField(label="valor do produto concorrente"),
-            "input2" : c.InputField(label="marca do produto concorrente"),
-            "input3" : c.InputField(label="Tempo que compra o produto no concorrente"),
-            "input4" : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
+            0 : c.InputField(label="nome do produto concorrente"),
+            1 : c.InputField(label="valor do produto concorrente"),
+            2 : c.InputField(label="marca do produto concorrente"),
+            3 : c.InputField(label="Tempo que compra o produto no concorrente"),
+            4 : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
             }
         } 
     } 
