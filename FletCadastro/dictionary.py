@@ -8,7 +8,7 @@ num_hint = "Até 4 casas decimais (Ex.: 9.9999)"
 # e auxiliam no banco de dados
 lista = {
     0 : {
-        "tit":ft.Text("Cadastro de Produtos",size=20),
+        "tit":ft.Text("Cadastro de Produtos",size=20,color=ft.colors.WHITE),
         "dest":ft.NavigationBarDestination(icon=ft.icons.FASTFOOD_OUTLINED,selected_icon=ft.icons.FASTFOOD, label="Produtos"),
         "col":{
             0:"nm_prod",
@@ -27,7 +27,7 @@ lista = {
         },
 
     1 : {  
-        "tit":ft.Text("Cadastro de Pessoas",size=20),
+        "tit":ft.Text("Cadastro de Pessoas",size=20,color=ft.colors.WHITE),
         "dest":ft.NavigationBarDestination(icon=ft.icons.PEOPLE_OUTLINED,selected_icon=ft.icons.PEOPLE, label="Pessoas"),
         "col":{
             0:"nm_pessoa",
@@ -41,7 +41,7 @@ lista = {
         },
 
     2 : {
-        "tit":ft.Text("Cadastro de Pesquisa",size=20),
+        "tit":ft.Text("Cadastro de Pesquisa",size=20,color=ft.colors.WHITE),
         "dest":ft.NavigationBarDestination(icon=ft.icons.BOOK_OUTLINED,selected_icon=ft.icons.BOOK, label="Pesquisa"),
         "col":{
             0:"nome_conc",
