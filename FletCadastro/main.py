@@ -62,12 +62,36 @@ def main(page: ft.Page):
         body = ft.Column(controls=[l.lista[pagina]["inputs"][x] for x in range(l.conta_lista(l.lista[pagina]))])
         page.add(ft.Column(controls=[cl.header()]),ft.Column(controls=[l.lista[pagina]["tit"]]),
                  ft.Column(controls=[body]),ft.Column(controls=[cl.LinhaDiv()]))
+        
+        # Botão flutuante e posicionamento
+        if not l.lista[pagina]["vis"]:
+            page.floating_action_button = ""
+            page.update()
+        else:
+            lista = ft.ListView
+            page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add,)
+            page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_FLOAT
+            page.update()
+            
+            # Conecta no banco pra trazer as informações ja cadastradas
+            #BUG Ajustar urgente
+            tab = l.lista[pagina]["table"]
+            colunas = [(l.lista[pagina]["col"][x]) for x in range(l.conta_lista(l.lista[pagina]))]
+            unpacked = ", ".join([tab+"."+ e for e in colunas])
 
-    # Botão flutuante e posicionamento
-    page.floating_action_button = ft.FloatingActionButton(icon=ft.icons.ADD, on_click=btn_add)
-    page.floating_action_button_location = ft.FloatingActionButtonLocation.END_FLOAT
-    
-    # Carrega a primeira pagina ao abrir o aplicativo
+            with md.engine.connect() as conn:
+                query = conn.execute(md.text(f"SELECT {unpacked} FROM {tab}"))
+                for inputText in query.all():
+                    xxx = ft.DataCell(ft.Text(value=(inputText[x] for x in range(4))))
+                    print(ft.Text(value=(inputText)))
+                    my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]))) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
+                    my_table.rows.append(ft.DataRow(cells=[xxx]))
+                page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
+            
+                
+                
+
+    # Carrega a primeira tela ao abrir o aplicativo
     pag_index(0)
     page.update()
 

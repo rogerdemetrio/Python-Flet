@@ -23,7 +23,9 @@ lista = {
             2 : c.InputField(label="Descrição do produto"),
             3 : c.InputField(label="marca do produto"),
             },
-        "tb":md.Produto
+        "tb":md.Produto,
+        "vis":True,
+        "table":"tbproduto"
         },
 
     1 : {  
@@ -37,7 +39,9 @@ lista = {
             0 : c.InputField(label="nome da pessoa"),
             1 : c.InputField(label="sobrenome da pessoa")
             },
-        "tb":md.Pessoa
+        "tb":md.Pessoa,
+        "vis":True,
+        "table":"tbpessoa"
         },
 
     2 : {
@@ -59,7 +63,23 @@ lista = {
             4 : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
             },
         "tb":md.Pesquisa,
-        } 
+        "vis":True,
+        "table":"tbpesquisa"
+        },
+    3 : {
+        "tit":ft.Text("Teste de Texto usando dicionario",size=20,color=ft.colors.WHITE),
+        "dest":ft.NavigationBarDestination(icon=ft.icons.STICKY_NOTE_2_OUTLINED,selected_icon=ft.icons.STICKY_NOTE_2, label="Texto"),
+        "col":{
+             0:"",
+            },
+        "inputs":{
+            0 : ft.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. \nExcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        ,color=ft.colors.BLACK87)
+            },
+        "tb":"",
+        "vis":False,
+        "table":""
+        },
     } 
 
 # Conta a quantidade de colunas de cada dicionario
