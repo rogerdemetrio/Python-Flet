@@ -6,8 +6,8 @@ Ainda é um projeto em desenvolvimento
 
 ## Funcionalidades
 
-- [x] Produtos, com seus preços e detalhes
-- [ ] Pessoas, com seus endereços e contatos
+- [x] Cadastros de produtos, com seus preços e detalhes
+- [ ] Cadastros de pessoas, com seus endereços e contatos
 - [x] Pesquisas de mercado 
 - [x] Salvar essas informações num banco de dados
 - [x] Criar mais telas de cadastro ou informação de forma dinâmica
