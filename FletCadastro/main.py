@@ -42,7 +42,7 @@ def main(page: ft.Page):
         # Esse dicionario vem da junção da dos valores da "col" que ficam no dicionary.py, 
         # com os valores encontrados nos campos de input na tela principal
         for x in range(l.conta_lista(l.lista[pagina])):
-            tabela.update({str(l.lista[pagina]["col"][x]):str(i[x])})
+            tabela.update({str(l.lista[pagina]["col"][x][0]):str(i[x])})
         # Depois de formado o dicionario, é criado essa variavel para "quebrar" a lista 
         # passando na frente dela o parametro de cada tabela correspondente a tela. 
         # Ficando assim: md.Produto({'coluna'= 'input', 'coluna2'= 'input2'}) 
@@ -50,11 +50,12 @@ def main(page: ft.Page):
         tb = l.lista[pagina]["tb"](**tabela)
         md.session.add(tb)
         md.session.commit()
+        pag_index(pagina)
 
     # Função de paginação, traz os elementos viziveis 
     # (fora botão e navegação)
     def pag_index(ev):
-        global body,pagina
+        global body,pagina,my_table
         pagina = ev
         page.controls.clear() 
         body = ft.Column(controls=[l.lista[pagina]["inputs"][x] for x in range(l.conta_lista(l.lista[pagina]))])
