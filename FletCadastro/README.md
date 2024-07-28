@@ -40,6 +40,5 @@ Ainda é um projeto em desenvolvimento
 
 
 ## Autores
-
-- [@rogerdemetrio](https://www.github.com/rogerdemetrio)
+[@rogerdemetrio](https://www.github.com/rogerdemetrio)
 
