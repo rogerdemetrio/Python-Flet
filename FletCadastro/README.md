@@ -7,12 +7,12 @@ Ainda é um projeto em desenvolvimento
 ## Funcionalidades
 
 - [x] Produtos, com seus preços e detalhes
-- [x] Pessoas, com seus endereços e contatos
+- [ ] Pessoas, com seus endereços e contatos
 - [x] Pesquisas de mercado 
-- [x] Salvar essas informações num banco SQLite
-- [x] Criar mais telas de cadastro de forma dinâmica
-- [ ] Mostrar as informações salvas no banco
-- [ ] Buscar informações salvas no banco
+- [x] Salvar essas informações num banco de dados
+- [x] Criar mais telas de cadastro ou informação de forma dinâmica
+- [ ] Mostrar as informações cadastradas que estão salvas no banco de dados
+- [ ] Buscar informações salvas no banco de dados
 
 
 ## Screenshots
