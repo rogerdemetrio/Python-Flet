@@ -23,7 +23,7 @@ Ainda é um projeto em desenvolvimento
 
 ## Documentação
 
-[Documentação em andamento](https://app.gitbook.com/o/vOPvKdkMI16QJERoLVEh/s/dtj8dGiSpf6pLnUSTZsm/)
+[Documentação](https://app.gitbook.com/o/vOPvKdkMI16QJERoLVEh/s/dtj8dGiSpf6pLnUSTZsm/)
 
 
 ## Melhorias
