@@ -3,8 +3,6 @@ import dictionary as l
 import models as md
 import classes as cl
 
-#TODO -> Mostrar informação do banco na tela
-
 def main(page: ft.Page):
     # Padrões da pagina alterados para trazer em forma de aplicativo para smartphone "simulado"
     page.window.height = 920
@@ -74,18 +72,23 @@ def main(page: ft.Page):
             page.update()
             
             # Conecta no banco pra trazer as informações ja cadastradas
-            #BUG Ajustar urgente
+            #BUG Ajustar urgente = Tela não traz as informações do banco dinamicamente
             tab = l.lista[pagina]["table"]
             colunas = [(l.lista[pagina]["col"][x]) for x in range(l.conta_lista(l.lista[pagina]))]
             unpacked = ", ".join([tab+"."+ e for e in colunas])
 
             with md.engine.connect() as conn:
                 query = conn.execute(md.text(f"SELECT {unpacked} FROM {tab}"))
-                for inputText in query.all():
-                    xxx = ft.DataCell(ft.Text(value=(inputText[x] for x in range(4))))
-                    print(ft.Text(value=(inputText)))
-                    my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]))) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
-                    my_table.rows.append(ft.DataRow(cells=[xxx]))
+                my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]))) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
+                xxx = ft.DataRow(cells=[])
+                for inputText in query:
+                    for valuex in inputText._tuple():
+                        cell = ft.DataCell(ft.Text(value=(valuex)))
+                        print(valuex)
+                        xxx.cells.append(cell)
+                    my_table.rows.append(xxx)
+                
+                #page.add(my_table)
                 page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
             
                 
