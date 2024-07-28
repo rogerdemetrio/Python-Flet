@@ -6,13 +6,14 @@ Ainda é um projeto em desenvolvimento
 
 ## Funcionalidades
 
-- [x] Cadastros de produtos, com seus preços e detalhes
-- [ ] Cadastros de pessoas, com seus endereços e contatos
-- [x] Pesquisas de mercado 
-- [x] Salvar essas informações num banco de dados
-- [x] Criar mais telas de cadastro ou informação de forma dinâmica
-- [ ] Mostrar as informações cadastradas que estão salvas no banco de dados
-- [ ] Buscar informações salvas no banco de dados
+- Cadastros de produtos, com seus preços e detalhes
+- Cadastros de pessoas
+- Pesquisas de mercado 
+- Salvar essas informações num banco de dados
+- Criar mais telas de cadastro ou informação de forma dinâmica
+##### W.I.P.:
+- Mostrar as informações cadastradas que estão salvas no banco de dados
+- Buscar informações salvas no banco de dados
 
 
 ## Screenshots
