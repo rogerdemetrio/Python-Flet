@@ -7,8 +7,8 @@ def main(page: ft.Page):
     # Padrões da pagina alterados para trazer em forma de aplicativo para smartphone "simulado"
     page.window.height = 920
     page.window.width = 480
-    page.window.maximizable = False
-    page.window.resizable = False
+    # page.window.maximizable = False
+    # page.window.resizable = False
     page.window.shadow = True
 
     # Cores, titulo e alguns outros parametros basicos
