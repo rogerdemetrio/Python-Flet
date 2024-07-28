@@ -73,23 +73,32 @@ def main(page: ft.Page):
             
             # Conecta no banco pra trazer as informações ja cadastradas
             #BUG Ajustar urgente = Tela não traz as informações do banco dinamicamente
+            my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]))) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
             tab = l.lista[pagina]["table"]
             colunas = [(l.lista[pagina]["col"][x]) for x in range(l.conta_lista(l.lista[pagina]))]
-            unpacked = ", ".join([tab+"."+ e for e in colunas])
+            unpacked = ", ".join([e for e in colunas])
+            result = md.sql.text(f"SELECT {unpacked} from {tab}")
+            xxx = md.session.execute(result).fetchall()
+            print(xxx)
+            
+            # # with md.engine.connect() as conn:
+            # #     tab = l.lista[pagina]["table"]
+            # #     dtRow = ft.DataRow(cells=[])
+            # #     colunas = [(l.lista[pagina]["col"][x]) for x in range(l.conta_lista(l.lista[pagina]))]
+            # #     unpacked = ", ".join([tab+"."+ e for e in colunas])
+            # #     query = conn.execute(md.text(f"SELECT {unpacked} FROM {tab}"))
+            # # for inputText in query:
+            # #     for valuex in inputText._tuple():
+            # #         dtCell = ft.DataCell(content=ft.Text(value=str(valuex)))
+            # #         print(valuex)
+            # #         #print(dtCell)
+            # #     dtRow.cells.append([dtCell])
+            # #     print(dtRow)
+            # #     my_table.rows.append(dtRow)
 
-            with md.engine.connect() as conn:
-                query = conn.execute(md.text(f"SELECT {unpacked} FROM {tab}"))
-                my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]))) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
-                xxx = ft.DataRow(cells=[])
-                for inputText in query:
-                    for valuex in inputText._tuple():
-                        cell = ft.DataCell(ft.Text(value=(valuex)))
-                        print(valuex)
-                        xxx.cells.append(cell)
-                    my_table.rows.append(xxx)
-                
-                #page.add(my_table)
-                page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
+
+
+            page.add(ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.ALWAYS)], scroll= ft.ScrollMode.ALWAYS), expand= 2), )
             
                 
                 
