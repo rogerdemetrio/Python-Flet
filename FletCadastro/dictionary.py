@@ -61,7 +61,7 @@ lista = {
                              input_filter=ft.InputFilter(allow=True, regex_string=r"^\d*(\.\d{0,4})?$", replacement_string="")),
             2 : c.InputField(label="marca do produto concorrente"),
             3 : c.InputField(label="Tempo que compra o produto no concorrente"),
-            4 : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=6),
+            4 : c.InputField(label="observação",multiline=True,min_lines=3,max_lines=3),
             },
         "vis":True,
         "table":"tbpesquisa"
