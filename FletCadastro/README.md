@@ -33,8 +33,9 @@ Ainda é um projeto em desenvolvimento
 
 ## Aprendizados
 
-- Criação de aplicações com criação de tela dinamica
-- Remoção de repetições de código repetitivas
+- Aplicação com criação de tela dinamica
+- Manipulação de modelos de banco de dados via SQLalchemy
+- Funcionalidades do framework Flet
 
 
 ## Autores
