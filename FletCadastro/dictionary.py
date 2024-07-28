@@ -12,10 +12,10 @@ lista = {
         "dest":ft.NavigationBarDestination(icon=ft.icons.FASTFOOD_OUTLINED,selected_icon=ft.icons.FASTFOOD, label="Produtos"),
         "tb":md.Produto,
         "col":{
-            0:"nm_prod",
-            1:"vl_prod",
-            2:"desc_prod",
-            3:"marca"
+            0:["nm_prod","Nm. Prod."],
+            1:["vl_prod","Vl. Prod."],
+            2:["desc_prod","Desc. Prod."],
+            3:["marca","Marca"]
             },
         "inputs":{
             0 : c.InputField(label="Nome do produto"),
@@ -33,8 +33,8 @@ lista = {
         "dest":ft.NavigationBarDestination(icon=ft.icons.PEOPLE_OUTLINED,selected_icon=ft.icons.PEOPLE, label="Pessoas"),
         "tb":md.Pessoa,
         "col":{
-            0:"nm_pessoa",
-            1:"sob_pessoa",
+            0:["nm_pessoa","Nome"],
+            1:["sob_pessoa","Sobrenome"],
             },
         "inputs":{
             0 : c.InputField(label="nome da pessoa"),
@@ -49,11 +49,11 @@ lista = {
         "dest":ft.NavigationBarDestination(icon=ft.icons.BOOK_OUTLINED,selected_icon=ft.icons.BOOK, label="Pesquisa"),
         "tb":md.Pesquisa,
         "col":{
-            0:"nome_conc",
-            1:"vl_conc",
-            2:"marca_conc",
-            3:"dias_conc",
-            4:"obs",
+            0:["nome_conc","Prod. Concorrente"],
+            1:["vl_conc","Vl. Prod."],
+            2:["marca_conc","Marca"],
+            3:["dias_conc","Tempo"],
+            4:["obs","Observação"],
             },
         "inputs":{
             0 : c.InputField(label="nome do produto concorrente"),

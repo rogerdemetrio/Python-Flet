@@ -71,11 +71,11 @@ def main(page: ft.Page):
             page.floating_action_button_location = ft.FloatingActionButtonLocation.CENTER_FLOAT
             page.update()
             # Cria o corpo da tabela com as colunas
-            my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x]),color=ft.colors.BLACK87)) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
+            my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x][1]),color=ft.colors.BLACK87)) for x in range(l.conta_lista(l.lista[pagina]))],rows=[],)
             # Traz o nome da tabela a ser processada
             tab = l.lista[pagina]["table"]
             # busca a lista de colunas do dicionario
-            colunas = [(l.lista[pagina]["col"][x]) for x in range(l.conta_lista(l.lista[pagina]))]
+            colunas = [(l.lista[pagina]["col"][x][0]) for x in range(l.conta_lista(l.lista[pagina]))]
             # tranforma a lista em uma string com "," entre as colunas
             unpacked = ", ".join([e for e in colunas])
             # cria o select com a tabela e as colunas previamente processadas
