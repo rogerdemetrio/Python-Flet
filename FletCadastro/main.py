@@ -45,10 +45,19 @@ def main(page: ft.Page):
             tabela.update({str(l.lista[pagina]["col"][x][0]):str(inputText_value[x])})
         # Depois de formado o dicionario, é criado essa variavel para "quebrar" a lista passando na frente dela 
         # o parametro de cada tabela correspondente a tela. Ficando assim: md.Produto('coluna' = 'input', 'coluna2' = 'input2') 
-        # e depois passando para o banco através da session e comitando
         tb = l.lista[pagina]["tb"](**tabela)
-        md.session.add(tb)
-        md.session.commit()
+        # Tenta passar os dados para o banco através da session
+        try:
+            # Se conseguir conectar, comita, e lança um alerta dizendo que deu sucesso
+            for inputText in body.controls:
+                inputText.value = ""
+            md.session.add(tb)
+            md.session.commit()
+            page.open(cl.alerta(True))
+        except:
+            # Se não conseguir conectar, lança um alerta dizendo que deu erro e não limpa os campos
+            page.open(cl.alerta(False))
+        
         pag_index(pagina)
 
     # Função de paginação, traz os elementos viziveis 
@@ -110,11 +119,9 @@ def main(page: ft.Page):
                      ,ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.AUTO)], scroll= ft.ScrollMode.ADAPTIVE),height=200,alignment=ft.alignment.center)
                     ,ft.Container(height=50))
             
-            
     # Carrega a primeira tela ao abrir o aplicativo
     pag_index(0)
     page.update()
-    
 
 if __name__ == "__main__":
     ft.app(target=main)
