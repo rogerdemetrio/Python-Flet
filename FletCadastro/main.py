@@ -35,21 +35,29 @@ def main(page: ft.Page):
     # quando o botão flutuante é acionado
     def btn_add(ev):
         # Pega os valores dos inputs nas telas em forma de lista
-        i = [inputText.value for inputText in body.controls]
+        inputText_value = [inputText.value for inputText in body.controls]
         # Cria uma tabela vazia
         tabela = {}
         # Laço para formar um dicionario com os dados de coluna e input ficando assim {'coluna': 'input', 'coluna2': 'input2'}. 
         # Esse dicionario vem da junção da dos valores da "col" que ficam no dicionary.py, 
         # com os valores encontrados nos campos de input na tela principal
         for x in range(l.conta_lista(l.lista[pagina])):
-            tabela.update({str(l.lista[pagina]["col"][x][0]):str(i[x])})
-        # Depois de formado o dicionario, é criado essa variavel para "quebrar" a lista 
-        # passando na frente dela o parametro de cada tabela correspondente a tela. 
-        # Ficando assim: md.Produto({'coluna'= 'input', 'coluna2'= 'input2'}) 
-        # e depois passando para o banco através da session e comitando
+            tabela.update({str(l.lista[pagina]["col"][x][0]):str(inputText_value[x])})
+        # Depois de formado o dicionario, é criado essa variavel para "quebrar" a lista passando na frente dela 
+        # o parametro de cada tabela correspondente a tela. Ficando assim: md.Produto('coluna' = 'input', 'coluna2' = 'input2') 
         tb = l.lista[pagina]["tb"](**tabela)
-        md.session.add(tb)
-        md.session.commit()
+        # Tenta passar os dados para o banco através da session
+        try:
+            # Se conseguir conectar, comita, e lança um alerta dizendo que deu sucesso
+            for inputText in body.controls:
+                inputText.value = ""
+            md.session.add(tb)
+            md.session.commit()
+            page.open(cl.alerta(True))
+        except:
+            # Se não conseguir conectar, lança um alerta dizendo que deu erro e não limpa os campos
+            page.open(cl.alerta(False))
+        
         pag_index(pagina)
 
     # Função de paginação, traz os elementos viziveis 
@@ -58,9 +66,10 @@ def main(page: ft.Page):
         global body,pagina,my_table
         pagina = ev
         page.controls.clear() 
+        # Adiciona na tela as caixas onde o usuario imputa os dados
         body = ft.Column(controls=[l.lista[pagina]["inputs"][x] for x in range(l.conta_lista(l.lista[pagina]))])
-        page.add(ft.Column(controls=[cl.header()]),ft.Column(controls=[l.lista[pagina]["tit"]]),
-                 ft.Column(controls=[body]),ft.Column(controls=[cl.LinhaDiv()]))
+        # Cria a pagina 
+        page.add(ft.Column(controls=[cl.header()]),ft.Column(controls=[l.lista[pagina]["tit"]]),ft.Column(controls=[body]),ft.Column(controls=[cl.LinhaDiv()]))
         
         # Caso no dicionario o botão esteja vis = False, cai no if e não mostra o mesmo na tela.
         if not l.lista[pagina]["vis"]:
@@ -73,8 +82,9 @@ def main(page: ft.Page):
             page.update()
 
             # Cria o corpo da tabela com as colunas
-            my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x][1]),color=ft.colors.WHITE38)) for x in range(l.conta_lista(l.lista[pagina]))]
-                                    , rows=[], width = page.window.width, horizontal_lines = ft.BorderSide(1, ft.colors.GREY_600), horizontal_margin = 8, bgcolor = ft.colors.BLACK54,column_spacing=80)
+            my_table = ft.DataTable(columns=[ft.DataColumn(ft.Text(str(l.lista[pagina]["col"][x][1]),color=ft.colors.WHITE38)) for x in range(l.conta_lista(l.lista[pagina]))],
+                                    rows=[], width = page.window.width, horizontal_lines = ft.BorderSide(1, ft.colors.GREY_600), horizontal_margin = 8, 
+                                    bgcolor = ft.colors.BLACK54,column_spacing=80)
             # Traz o nome da tabela a ser processada
             tab = l.lista[pagina]["table"]
 
@@ -86,7 +96,6 @@ def main(page: ft.Page):
 
             # cria o select com a tabela e as colunas previamente processadas
             result = md.sql.text(f"SELECT {unpacked} from {tab}")
-
             # Conecta no banco pra trazer as informações ja cadastradas
             query = md.session.execute(result).fetchall()
 
@@ -100,24 +109,19 @@ def main(page: ft.Page):
                     # Cria a variavel da celula e coloca os valores dentro de cada celula individualmente
                     dtCell = ft.DataCell(content=ft.Text(value=valueX ))
                     dtRow.cells.append(dtCell)
-
                 # Coloca cada linha processada dentro da tabela
                 my_table.rows.append(dtRow)
-
                 # Limpa a linha processada anteriormente
                 dtRow = ft.DataRow(cells=[])
-
             # Adiciona um container expandido, depois a tabela criada 
-            # e um outro conrtainer para gerar um espaço para o botão de adicionar os valores no banco
+            # e um outro container para gerar um espaço para o botão de adicionar os valores no banco
             page.add(ft.Container(expand=True)
                      ,ft.Container(content= ft.Column([ft.Row([my_table], scroll= ft.ScrollMode.AUTO)], scroll= ft.ScrollMode.ADAPTIVE),height=200,alignment=ft.alignment.center)
                     ,ft.Container(height=50))
             
-            
     # Carrega a primeira tela ao abrir o aplicativo
     pag_index(0)
     page.update()
-    
 
 if __name__ == "__main__":
     ft.app(target=main)

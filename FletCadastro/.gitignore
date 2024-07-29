@@ -163,4 +163,5 @@ cython_debug/
 
 #Custom
 /testes.py
-bancoCadastro.db
+/bancoCadastro.db
+
