@@ -40,7 +40,7 @@ def alerta(x):
     else:
         dlg = ft.AlertDialog(
             icon=ft.Icon(name=ft.icons.ERROR_OUTLINE, color=ft.colors.WHITE),
-            title=ft.Text("Erro no Cadastro", text_align=ft.TextAlign.CENTER),
+            title=ft.Text("Erro", text_align=ft.TextAlign.CENTER),
             #content=ft.Text("Registros não cadastrados",text_align=ft.TextAlign.CENTER,size=12),
             bgcolor=ft.colors.RED_700,
                 shape=ft.CircleBorder(),
